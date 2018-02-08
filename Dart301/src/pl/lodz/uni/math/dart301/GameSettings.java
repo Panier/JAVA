@@ -3,7 +3,7 @@ package pl.lodz.uni.math.dart301;
 import java.util.Random;
 
 public class GameSettings {
-	int [] dartValues=new int[64] ;
+	public int [] dartValues=new int[63] ;
 	boolean ifWon=false,playerWon=false;
 	int scoreBeforeLeg;
 	
@@ -28,12 +28,16 @@ public class GameSettings {
 	public void playerThrowingDart(Player p) {
 		int tabPlace = 0,score = 0;
 		Random r=new Random();
-		tabPlace= r.nextInt(63+1);
+		tabPlace= r.nextInt(63);
 		score = dartValues[tabPlace];
 		p.setScore(score);
 	}
 	
-	private boolean ifPlayerWin(Player p) {
+	public void playerThrowingDartManipulated(Player p,int score) {
+		p.setScore(score);
+	}
+	
+	public boolean ifPlayerWin(Player p) {
 		if(p.getScore()==0) {
 		return true;
 		}else {
@@ -55,12 +59,12 @@ public class GameSettings {
 			throwCounts++;
 		}
 		if(scoreUnderZero(p,scoreBeforeLeg)) {
-		playerWon = playerWonGame(throwCounts,ifWon,p);
+		playerWon = playerWonGame(ifWon,p);
 		}
 		return playerWon;
 	}
 	
-	private boolean playerWonGame(int playerThrows,boolean won,Player p) {
+	private boolean playerWonGame(boolean won,Player p) {
 		if (won == true) {
 			System.out.println("Player " + p.getName() + " won !!");
 			return true;
@@ -77,6 +81,14 @@ public class GameSettings {
 		}else {
 			return true;
 		}
+	}
+	
+	public String nameOfWonPlayer(Player p,boolean player) {
+		String name ="";
+		if (player == true) {
+			name = p.getName();
+		}
+		return name;
 	}
 
 }

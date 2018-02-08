@@ -16,7 +16,12 @@ public class BankAccount {
 			throw new Exception("Balance < 0");
 		}
 		if(_accNumber.length() == 16) {
-			this.setAccNumber(_accNumber);
+			try{
+				double number = Double.parseDouble(_accNumber);
+				this.setAccNumber(_accNumber);
+			}catch (NumberFormatException nfe) {
+				System.out.println("Wrong syntax in Account Number");
+			}		
 		}else {
 			throw new Exception("Incorrect Account Number");
 		}
@@ -27,8 +32,12 @@ public class BankAccount {
 		return accBalance;
 	}
 
-	public void setAccBalance(float accBalance) {
+	public void setAccBalance(float accBalance) throws Exception {
+		if(accBalance >= 0) {
 		this.accBalance = accBalance;
+		}else {
+			throw new Exception("Balance < 0");
+		}
 	}
 
 	public String getAccNumber() {

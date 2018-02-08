@@ -1,7 +1,11 @@
 package banking;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BankingMain {
 
@@ -56,9 +60,13 @@ public class BankingMain {
 		mBank.showUserTransactions("KM1");
 		bZWBK.showUserTransactions("LP1");
 
-		
+		//PrintWriter fileBank = new PrintWriter("Account Transactions.txt", true);
+		PrintWriter fileBank = new PrintWriter(new FileWriter("Account Transactions.txt", true));
 
-
+		fileBank.println(bZWBK.getBankTransactions());
+		fileBank.println(mBank.getBankTransactions());
+		fileBank.flush();
+		fileBank.close();
 	}
 
 }
